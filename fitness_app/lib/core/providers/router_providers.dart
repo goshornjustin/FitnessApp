@@ -1,70 +1,77 @@
+/// App router configuration using GoRouter.
+///
+/// [routerProvider] builds a `GoRouter` that watches [authStateProvider] and
+/// applies redirect logic on every navigation event:
+///
+/// - `/splash` — shown while auth state is loading; redirects to `/` or
+///   `/auth` once resolved.
+/// - Unauthenticated users are always redirected to `/auth`.
+/// - Authenticated users whose profile is incomplete (`age == 0` or empty
+///   name) are redirected to `/profile/setup` before reaching any other route.
+/// - Authenticated users with a complete profile on `/auth` are bounced to `/`.
+library;
+
 import 'package:fitness_app/features/authentication/presentation/pages/auth_page.dart';
 import 'package:fitness_app/features/authentication/presentation/providers/auth_providers.dart';
+import 'package:fitness_app/features/home/presentation/pages/home_page.dart';
+import 'package:fitness_app/features/profile/presentation/pages/profile_page.dart';
+import 'package:fitness_app/features/profile/presentation/pages/profile_setup_page.dart';
 import 'package:fitness_app/shared/widgets/splash_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
-  // Watch auth state for navigation logic
   final authState = ref.watch(authStateProvider);
-  
+
   return GoRouter(
     initialLocation: '/splash',
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const Scaffold(
-          body: Center(
-            child: Text('Home - Clean Architecture with Riverpod'),
-          ),
-        ),
+        builder: (_, __) => const HomePage(),
       ),
       GoRoute(
         path: '/auth',
-        builder: (context, state) => const AuthPage(),
+        builder: (_, __) => const AuthPage(),
       ),
       GoRoute(
         path: '/profile',
-        builder: (context, state) => const Scaffold(
-          body: Center(
-            child: Text('Profile Screen'),
-          ),
-        ),
+        builder: (_, __) => const ProfilePage(),
+      ),
+      GoRoute(
+        path: '/profile/setup',
+        builder: (_, __) => const ProfileSetupPage(),
       ),
       GoRoute(
         path: '/splash',
-        builder: (context, state) => const SplashScreen(),
+        builder: (_, __) => const SplashScreen(),
       ),
     ],
     redirect: (context, state) {
+      final loc = state.matchedLocation;
       return authState.when(
         data: (user) {
           final isAuth = user != null;
-          final isLogin = state.matchedLocation == '/auth';
-          final isSplash = state.matchedLocation == '/splash';
-
-          if (isSplash) {
+          if (loc == '/splash') {
             return isAuth ? '/' : '/auth';
           }
 
-          if (isLogin) {
-            return isAuth ? '/' : null;
+          if (!isAuth) {
+            return loc == '/auth' ? null : '/auth';
           }
 
-          return isAuth ? null : '/auth';
-        },
-        loading: () {
-          // Show splash while loading
-          if (state.matchedLocation != '/splash') {
-            return '/splash';
+          // Authenticated — check if profile is complete
+          final profileIncomplete = user.age == 0 || user.name.isEmpty;
+          if (profileIncomplete && loc != '/profile/setup') {
+            return '/profile/setup';
           }
+
+          if (loc == '/auth') return '/';
+
           return null;
         },
-        error: (_, __) {
-          // On error, go to auth
-          return '/auth';
-        },
+        loading: () => loc == '/splash' ? null : '/splash',
+        error: (_, __) => '/auth',
       );
     },
   );
