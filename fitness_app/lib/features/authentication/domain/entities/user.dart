@@ -1,3 +1,13 @@
+/// Domain entity representing an authenticated app user.
+///
+/// This is the pure Dart model used throughout the domain and presentation
+/// layers. It has no Firebase or JSON dependencies — those live in
+/// `UserModel` (the data layer). The router reads [User.age] and [User.name]
+/// to detect an incomplete profile and redirect to `/profile/setup`.
+///
+/// All weights are stored in kilograms and heights in centimetres.
+library;
+
 import 'package:equatable/equatable.dart';
 
 class User extends Equatable {

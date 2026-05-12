@@ -1,3 +1,11 @@
+/// Sign-in / sign-up page.
+///
+/// A single page that toggles between sign-in and sign-up modes. Uses
+/// `flutter_hooks` for local text controller state and `hooks_riverpod` to
+/// read auth providers. The form is hidden once the user is authenticated —
+/// the router handles navigation away automatically via `authStateProvider`.
+library;
+
 import 'package:fitness_app/features/authentication/domain/usecases/sign_in_with_email.dart';
 import 'package:fitness_app/features/authentication/domain/usecases/sign_up_with_email.dart';
 import 'package:fitness_app/features/authentication/presentation/providers/auth_providers.dart';

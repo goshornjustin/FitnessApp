@@ -1,3 +1,13 @@
+/// Network connectivity check abstraction.
+///
+/// [NetworkInfo] is an interface used by repositories to gate remote calls
+/// behind a connectivity check before hitting Firestore or an API. This keeps
+/// network logic testable and out of the data-source layer.
+///
+/// [NetworkInfoImpl] checks connectivity by doing a DNS lookup for
+/// `google.com` — if the lookup fails the device is considered offline.
+library;
+
 import 'dart:io';
 
 abstract class NetworkInfo {

@@ -1,3 +1,19 @@
+/// Firebase-backed authentication data source.
+///
+/// `AuthRemoteDataSource` is the abstract interface; `AuthRemoteDataSourceImpl`
+/// is the Firebase implementation. Repositories depend on the interface, not
+/// the implementation, so it can be swapped out (e.g. in tests).
+///
+/// Responsibilities:
+/// - Sign in / sign up / sign out via Firebase Auth.
+/// - Read and write user profile documents in the `users` Firestore collection.
+/// - Stream auth state changes so the UI reacts without polling.
+/// - Send password-reset emails and delete accounts.
+///
+/// Throws typed exceptions from `core/errors/exceptions.dart` — never raw
+/// Firebase exceptions — so the repository layer can map them to `Failure`.
+library;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:fitness_app/core/errors/exceptions.dart';

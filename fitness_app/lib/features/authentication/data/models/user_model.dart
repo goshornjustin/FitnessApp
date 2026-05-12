@@ -1,3 +1,17 @@
+/// Data-layer model for [User] that adds JSON and Firebase serialisation.
+///
+/// [UserModel] extends the domain [User] entity and adds:
+/// - `fromJson` / `toJson` via `json_annotation` (code-generated in
+///   `user_model.g.dart`) for Firestore read/write.
+/// - `fromEntity` — converts a domain [User] back to a [UserModel] when
+///   passing data down to the data layer (e.g. `updateUserProfile`).
+/// - `fromFirebaseUser` — convenience factory used when creating a brand-new
+///   user record from a Firebase Auth credential.
+///
+/// Run `flutter packages pub run build_runner build` after modifying
+/// any field annotations.
+library;
+
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:fitness_app/features/authentication/domain/entities/user.dart';
 import 'package:json_annotation/json_annotation.dart';

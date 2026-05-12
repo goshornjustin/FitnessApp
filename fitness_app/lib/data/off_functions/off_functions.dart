@@ -1,3 +1,17 @@
+/// OpenFoodFacts API helpers.
+///
+/// [OffFunctions] wraps the `openfoodfacts` package with two operations:
+/// - [OffFunctions.setUserAgent] — must be called once at app startup to
+///   identify the app to the OFF API (required by their terms of service).
+/// - [OffFunctions.searchProduct] — searches the OFF database by product name
+///   and returns matching [Product] objects with nutrition data.
+/// - [OffFunctions.extractIngredients] — uses OCR to extract an ingredient
+///   list from a product photo identified by barcode.
+///
+/// Note: credentials are intentionally empty — OFF allows anonymous read
+/// access for most endpoints.
+library;
+
 import 'package:openfoodfacts/openfoodfacts.dart';
 
 class OffFunctions {

@@ -1,3 +1,10 @@
+/// Domain entity for a single ingredient within a `Recipe`.
+///
+/// `quantity` is a free-form string (e.g. `"1 cup"`, `"200g"`) rather than a
+/// numeric value to accommodate varied measurement formats. Macro fields are
+/// optional because not all ingredients have known nutrition data.
+library;
+
 import 'package:equatable/equatable.dart';
 
 class RecipeComponent extends Equatable {

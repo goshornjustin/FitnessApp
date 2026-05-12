@@ -1,3 +1,10 @@
+/// Use case: register a new user with email, password, and display name.
+///
+/// Creates the Firebase Auth account and writes an initial [User] document to
+/// Firestore with default empty profile fields. The router will then redirect
+/// the user to `/profile/setup` to complete their profile.
+library;
+
 import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/errors/failures.dart';
 import 'package:fitness_app/core/usecases/usecase.dart';

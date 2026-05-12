@@ -1,3 +1,16 @@
+/// Riverpod providers for authentication state and actions.
+///
+/// - `authStateProvider` — `StreamProvider` that mirrors Firebase Auth state.
+///   Emits `null` when signed out, or a full [User] entity when signed in.
+///   The router watches this to handle auth redirects.
+/// - `currentUserProvider` — synchronous read of the latest user from the stream.
+/// - `authLoadingProvider` / `authErrorProvider` — ephemeral UI state for the
+///   sign-in/sign-up form.
+/// - `signInProvider` / `signUpProvider` — `Provider.family` actions that call
+///   the appropriate use case and update loading/error state.
+/// - `signOutAsyncProvider` — `FutureProvider` action that signs the user out.
+library;
+
 import 'package:fitness_app/core/providers/external_providers.dart';
 import 'package:fitness_app/core/providers/repository_providers.dart';
 import 'package:fitness_app/core/providers/use_case_providers.dart';

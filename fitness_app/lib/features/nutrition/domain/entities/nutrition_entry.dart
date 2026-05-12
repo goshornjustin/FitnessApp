@@ -1,3 +1,13 @@
+/// Domain entity representing a single logged food item.
+///
+/// A [NutritionEntry] belongs to a specific user, date, and [MealType]
+/// (breakfast/lunch/dinner/snack). Macro values (calories, protein, carbs,
+/// fat) represent the totals for the logged quantity, not per-100g.
+///
+/// [MealType] is also defined here since it is tightly coupled to entry
+/// grouping and drives Firestore collection names in the data layer.
+library;
+
 import 'package:equatable/equatable.dart';
 
 class NutritionEntry extends Equatable {

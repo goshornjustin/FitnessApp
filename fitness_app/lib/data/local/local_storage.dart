@@ -1,3 +1,14 @@
+/// Hive-backed local storage wrapper.
+///
+/// [LocalStorage] tracks whether the user has previously created an account
+/// on this device using a dedicated Hive box (`firstTime`). This is used
+/// at app startup to decide whether to show onboarding.
+///
+/// The `_CreateAccount` class is the Hive object model for that box.
+/// Its adapter is code-generated — run `flutter packages pub run build_runner
+/// build` after modifying it.
+library;
+
 import 'package:fitness_app/data/local/hive_registrar.g.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 

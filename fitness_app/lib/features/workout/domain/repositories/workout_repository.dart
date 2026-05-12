@@ -1,3 +1,16 @@
+/// Abstract contract for workout and exercise data operations.
+///
+/// Three concerns:
+/// 1. **Exercise history** — CRUD + real-time stream of logged exercise
+///    sessions for a user, keyed by date.
+/// 2. **Workout programs** — read-only fetch of curated program documents
+///    from the `exercises` Firestore collection, grouped by category
+///    (e.g. `lowerBody`, `upperBody`, `cardio`).
+/// 3. **Health data** — stubs for step count and calories burned from the
+///    platform health API (currently returns 0; implemented directly in
+///    `ResultsPage` using the `health` package).
+library;
+
 import 'package:fitness_app/core/errors/failures.dart';
 import 'package:fitness_app/features/workout/domain/entities/exercise.dart';
 import 'package:fpdart/fpdart.dart';

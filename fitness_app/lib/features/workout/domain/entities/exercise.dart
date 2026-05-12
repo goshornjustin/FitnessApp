@@ -1,3 +1,12 @@
+/// Domain entity representing a single logged exercise session.
+///
+/// Stores the calories burned and optionally duration, sets, reps, weight,
+/// and free-text notes. The `date` field doubles as the Firestore document key
+/// (formatted as `YYYY-M-D` by the data source).
+///
+/// [ExerciseType] classifies the workout category and provides a display name.
+library;
+
 import 'package:equatable/equatable.dart';
 
 class Exercise extends Equatable {

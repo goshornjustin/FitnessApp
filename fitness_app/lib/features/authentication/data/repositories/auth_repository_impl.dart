@@ -1,3 +1,14 @@
+/// Concrete implementation of [AuthRepository].
+///
+/// Sits between the domain layer and the Firebase data source. Its two jobs:
+/// 1. Gate network calls behind a connectivity check ([NetworkInfo]).
+/// 2. Catch typed exceptions from `AuthRemoteDataSource` and convert them into
+///    `Either<Failure, T>` results so the domain layer never sees raw exceptions.
+///
+/// It also converts between the data-layer `UserModel` and the domain `User`
+/// entity so the domain layer stays free of Firebase types.
+library;
+
 import 'package:fitness_app/core/errors/exceptions.dart';
 import 'package:fitness_app/core/errors/failures.dart';
 import 'package:fitness_app/core/network/network_info.dart';

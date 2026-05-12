@@ -1,3 +1,15 @@
+/// Use case: derive personalised daily macro targets from a user's profile.
+///
+/// Uses the Mifflin-St Jeor equation to calculate BMR, applies an activity
+/// multiplier to get TDEE, then adjusts for the fitness goal (±500 kcal).
+/// Macros are split as: protein at 1.8g/kg bodyweight, fat at 27.5% of
+/// calories, carbs filling the remainder.
+///
+/// Returns a `NutritionGoals` object containing the recommended daily
+/// calories, protein, carbs, fat, plus the raw BMR and TDEE values.
+/// This is a pure calculation with no I/O — it always succeeds.
+library;
+
 import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/errors/failures.dart';
 import 'package:fitness_app/core/usecases/usecase.dart';

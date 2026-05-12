@@ -1,3 +1,13 @@
+/// Global string and numeric constants used throughout the app.
+///
+/// Split into two classes:
+/// - [AppConstants] — collection names, storage keys, API base URLs, and
+///   default goal values (e.g. 2 000 cal/day, 10 000 steps).
+/// - [ValidationConstants] — min/max bounds for user input (password length,
+///   weight range, age range, etc.).
+///
+/// Add new constants here rather than hard-coding magic values in widgets or
+/// data sources.
 class AppConstants {
   static const String appName = 'Fitness App';
   
@@ -27,6 +37,10 @@ class AppConstants {
   static const int defaultStepsGoal = 10000;
 }
 
+/// Bounds used to validate user-supplied profile and auth data.
+///
+/// Used in form validation logic to ensure inputs are within acceptable
+/// physical and security ranges before being sent to Firebase.
 class ValidationConstants {
   static const int minPasswordLength = 8;
   static const int maxPasswordLength = 50;

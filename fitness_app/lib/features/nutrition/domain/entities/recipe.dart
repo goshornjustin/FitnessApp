@@ -1,3 +1,12 @@
+/// Domain entity representing a user-created recipe.
+///
+/// A [Recipe] is composed of [RecipeComponent] items (ingredients with
+/// optional macro data), a list of step strings, and metadata such as
+/// cooking time and the ID of the user who created it.
+///
+/// Stored per-user in Firestore under `usersData/{userId}/recipes`.
+library;
+
 import 'package:equatable/equatable.dart';
 import 'package:fitness_app/features/nutrition/domain/entities/recipe_component.dart';
 
